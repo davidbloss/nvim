@@ -1,7 +1,7 @@
 return {
   {
     "pasky/claude.vim",
-    enabled = true,
+    enabled = false,
     config = function()
     end
   }

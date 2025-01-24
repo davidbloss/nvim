@@ -1,27 +1,9 @@
 require("config.lazy")
+-- require("mason").setup()
+-- require("mason-lspconfig").setup()
 require("options")
-
-vim.opt.shiftwidth = 4
-vim.opt.number = true
--- use system clipboard
-vim.opt.clipboard = "unnamedplus"
-
-vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
-vim.keymap.set("n", "<space>x", ":<CMD>lua<CR>")
-vim.keymap.set("n", "<space>ez", "<CMD>edit ~/.zshrc<CR>")
-vim.keymap.set("v", "<space>x", ":lua<CR>")
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
-
--- TODO:
--- port over missing Telescope mappings
--- port over NvimTree config
+require("keymaps")
+require("autocmds")
 
 --                                           *grr* *gra* *grn* *gri* *i_CTRL-S*
 -- Some keymaps are created unconditionally when Nvim starts:

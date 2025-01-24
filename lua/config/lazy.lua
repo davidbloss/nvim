@@ -24,26 +24,6 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- import your plugins
-    { "L3MON4D3/LuaSnip" },
-    { "nvim-tree/nvim-web-devicons", opts = {} },
-    { "tpope/vim-fugitive" },
-    {
-      "folke/tokyonight.nvim",
-      config = function()
-        vim.cmd.colorscheme("tokyonight")
-      end,
-    },
-    {
-      "vhyrro/luarocks.nvim",
-      priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-      config = true,
-    },
-    { import = "config.plugins" },
+    { import = "plugins" },
   },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  -- install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
-  -- checker = { enabled = true },
 })
