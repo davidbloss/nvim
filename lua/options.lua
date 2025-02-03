@@ -1,3 +1,14 @@
 vim.opt.clipboard = "unnamedplus" -- use system clipboard
-vim.opt.shiftwidth = 4
+vim.opt.foldcolumn = "1"
+-- vim.opt.foldlevel = 4
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.ignorecase = true
 vim.opt.number = true
+vim.opt.shiftwidth = 4
+vim.opt.smartcase = true
+vim.opt.showtabline = 2
+vim.opt.scrolloff = 2
+vim.opt.title = true
+vim.opt.undofile = true
+vim.opt.wildignore = { "*.o", "*.a", "__pycache__" }
