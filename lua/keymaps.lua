@@ -1,6 +1,10 @@
 -- General
-vim.keymap.set("n", "<leader>w", function() vim.cmd("write") end)
-vim.keymap.set("n", "<leader>q", function() vim.cmd("quit") end)
+vim.keymap.set("n", "<leader>w", function()
+  vim.cmd("write")
+end)
+vim.keymap.set("n", "<leader>q", function()
+  vim.cmd("quit")
+end)
 vim.keymap.set("n", "<leader>h", "<CMD>set hlsearch!<CR>")
 
 -- Text movements
@@ -22,6 +26,8 @@ vim.keymap.set("n", "<C-d>", "<C-d>M")
 vim.keymap.set("n", "<C-u>", "<C-u>M")
 vim.keymap.set("n", "<C-f>", "<C-f>M")
 vim.keymap.set("n", "<C-b>", "<C-b>M")
+vim.keymap.set("n", "H", "<CMD>bprevious<CR>")
+vim.keymap.set("n", "L", "<CMD>bnext<CR>")
 
 -- Window navigation
 vim.keymap.set("n", "<C-l>", "<C-w>l")
@@ -30,8 +36,6 @@ vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<F1>", "<ESC>")
 vim.keymap.set("n", "+", "<CMD>NvimTreeFindFileToggle<CR>")
-
-vim.keymap.set("n", "<leader>Q", "<CMD>quitall<CR>")
 
 vim.keymap.set("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>")
 
@@ -60,5 +64,5 @@ vim.keymap.set("n", "T", function()
   vim.cmd.term()
   vim.cmd.wincmd("J")
   vim.api.nvim_win_set_height(0, 20)
-  vim.cmd('startinsert')
+  vim.cmd("startinsert")
 end)
