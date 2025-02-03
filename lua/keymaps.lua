@@ -35,7 +35,7 @@ vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<F1>", "<ESC>")
-vim.keymap.set("n", "+", "<CMD>NvimTreeFindFileToggle<CR>")
+vim.keymap.set("n", "+", "<CMD>NvimTreeFindFileToggle!<CR>")
 
 vim.keymap.set("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>")
 
