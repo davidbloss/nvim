@@ -31,6 +31,10 @@ vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<F1>", "<ESC>")
 vim.keymap.set("n", "+", "<CMD>NvimTreeFindFileToggle<CR>")
 
+vim.keymap.set("n", "<leader>Q", "<CMD>quitall<CR>")
+
+vim.keymap.set("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>")
+
 -- Git
 vim.keymap.set("n", "<leader>G", "<CMD>G<CR>")
 vim.keymap.set("n", "<leader>gb", "<CMD>Git blame<CR>")

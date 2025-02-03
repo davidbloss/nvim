@@ -1,5 +1,9 @@
 local git_icons = require("config.icons").git
 local gitsigns_opts = {
+  on_attach = function(bufnr)
+    -- local api = require("nvim-tree.api")
+    -- api.config.mappings.default_on_attach(bufnr)
+  end,
   signs = {
     add = {
       hl = "GitSignsAdd",
@@ -65,12 +69,15 @@ local gitsigns_opts = {
 }
 return {
   {
-    'lewis6991/gitsigns.nvim',
+    "lewis6991/gitsigns.nvim",
     enabled = true,
-    -- opts = gitsigns_opts,
+    opts = gitsigns_opts,
+    config = function()
+      local gitsigns = require("gitsigns")
+    end,
   },
   {
-    'tpope/vim-fugitive',
+    "tpope/vim-fugitive",
     enabled = true,
   },
 }

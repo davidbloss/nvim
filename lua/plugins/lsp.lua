@@ -1,17 +1,9 @@
 return {
   {
-    'williamboman/mason.nvim',
-    enabled = true,
-    config = true,
-  },
-  {
-    'williamboman/mason-lspconfig.nvim',
-    enabled = true,
-    config = true,
-  },
-  {
     "neovim/nvim-lspconfig",
     dependencies = {
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
       {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
@@ -58,7 +50,7 @@ return {
       require("lspconfig").gopls.setup({ capabilities = capabilities })
       require("lspconfig").graphql.setup({ capabilities = capabilities })
       -- helm_ls - experimental
-      require("lspconfig").jedi_language_server.setup({})
+      require("lspconfig").jedi_language_server.setup({ capabilities = capabilities })
       -- jsonls
       -- postgres_lsp
       -- rust_analyzer

@@ -27,3 +27,6 @@ require("lazy").setup({
     { import = "plugins" },
   },
 })
+
+require("mason").setup()
+require("mason-lspconfig").setup()
