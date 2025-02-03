@@ -1,45 +1,52 @@
 local git_icons = require("config.icons").git
 local gitsigns_opts = {
   on_attach = function(bufnr)
-    -- local api = require("nvim-tree.api")
-    -- api.config.mappings.default_on_attach(bufnr)
+    local gitsigns = require("gitsigns")
+    vim.keymap.set("n", "[h", function()
+      gitsigns.nav_hunk("prev")
+    end)
+    vim.keymap.set("n", "]h", function()
+      gitsigns.nav_hunk("next")
+    end)
+
+    vim.keymap.set("n", "<leader>hi", gitsigns.preview_hunk_inline)
+    vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk)
+    vim.keymap.set("n", "<leader>hr", gitsigns.reset_hunk)
+    vim.keymap.set("n", "<leader>hs", gitsigns.stage_hunk)
+    vim.keymap.set("n", "<leader>hb", function()
+      gitsigns.blame_line({ full = false })
+    end)
+    vim.keymap.set("n", "<leader>hB", function()
+      gitsigns.blame_line({ full = true })
+    end)
+
+    -- Toggles
+    vim.keymap.set("n", "<leader>tb", gitsigns.toggle_current_line_blame)
+    vim.keymap.set("n", "<leader>tw", gitsigns.toggle_word_diff)
   end,
   signs = {
-    add = {
-      hl = "GitSignsAdd",
-      text = git_icons.LineAdded,
-      numhl = "GitSignsAddNr",
-      linehl = "GitSignsAddLn",
-    },
-    change = {
-      hl = "GitSignsChange",
-      text = git_icons.LineModified,
-      numhl = "GitSignsChangeNr",
-      linehl = "GitSignsChangeLn",
-    },
-    delete = {
-      hl = "GitSignsDelete",
-      text = git_icons.LineRemoved,
-      numhl = "GitSignsDeleteNr",
-      linehl = "GitSignsDeleteLn",
-    },
-    topdelete = {
-      hl = "GitSignsDelete",
-      text = git_icons.LineRemoved,
-      numhl = "GitSignsDeleteNr",
-      linehl = "GitSignsDeleteLn",
-    },
-    changedelete = {
-      hl = "GitSignsChange",
-      text = git_icons.LineModified,
-      numhl = "GitSignsChangeNr",
-      linehl = "GitSignsChangeLn",
-    },
+    add = { text = git_icons.LineAdded },
+    -- vim.api.nvim_set_hl(0, "GitSignsAdd", { link = "GitSignsAdd" })
+    -- vim.api.nvim_set_hl(0, "GitSignsAdd", { link = "GitSignsAddLn" })
+    -- vim.api.nvim_set_hl(0, "GitSignsAdd", { link = "GitSignsAddNr" })
+    change = { text = git_icons.LineModified },
+    -- vim.api.nvim_set_hl(0, 'GitSignsAdd', { link = 'GitSignsChange' })
+    -- vim.api.nvim_set_hl(0, 'GitSignsAdd', { link = 'GitSignsChangeLn' })
+    -- vim.api.nvim_set_hl(0, 'GitSignsAdd', { link = 'GitSignsChangeNr' })
+    delete = { text = git_icons.LineRemoved },
+    -- vim.api.nvim_set_hl(0, 'GitSignsAdd', { link = 'GitSignsDelete' })
+    -- vim.api.nvim_set_hl(0, 'GitSignsAdd', { link = 'GitSignsDeleteLn' })
+    -- vim.api.nvim_set_hl(0, 'GitSignsAdd', { link = 'GitSignsDeleteNr' })
+    topdelete = { text = git_icons.LineRemoved },
+    changedelete = { text = git_icons.LineModified },
   },
   signcolumn = true,
-  numhl = false,
+  numhl = true,
   linehl = false,
   word_diff = false,
+  current_line_blame_opts = {
+    delay = 300,
+  },
   watch_gitdir = {
     interval = 1000,
     follow_files = true,
@@ -65,16 +72,12 @@ local gitsigns_opts = {
     row = 0,
     col = 1,
   },
-  yadm = { enable = false },
 }
 return {
   {
     "lewis6991/gitsigns.nvim",
     enabled = true,
     opts = gitsigns_opts,
-    config = function()
-      local gitsigns = require("gitsigns")
-    end,
   },
   {
     "tpope/vim-fugitive",

@@ -30,7 +30,7 @@ return {
           json = front_end_opts,
           lua = { "stylua" },
           markdown = front_end_opts,
-          python = { "isort", "black" },
+          python = { "black" }, -- isort is iffy
           rust = { "rustfmt", lsp_format = "fallback" },
           svelte = front_end_opts,
           typescript = front_end_opts,
