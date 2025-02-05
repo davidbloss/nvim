@@ -2,9 +2,7 @@
 vim.keymap.set("n", "<leader>w", function()
   vim.cmd("write")
 end)
-vim.keymap.set("n", "<leader>q", function()
-  vim.cmd("quit")
-end)
+vim.keymap.set("n", "<leader>q", "<CMD>confirm quitall<CR>")
 vim.keymap.set("n", "<leader>h", "<CMD>set hlsearch!<CR>")
 
 -- Text movements
