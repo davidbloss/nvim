@@ -2,8 +2,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim' },
+      { "williamboman/mason.nvim" },
+      { "williamboman/mason-lspconfig.nvim" },
       {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
@@ -15,32 +15,9 @@ return {
           },
         },
       },
-      -- { -- optional cmp completion source for require statements and module annotations
-      --   "hrsh7th/nvim-cmp",
-      --   config = function()
-      --     require 'cmp'.setup {
-      --       -- snippet = {
-      --       --   expand = function(args)
-      --       --     require 'luasnip'.lsp_expand(args.body)
-      --       --   end
-      --       -- },
-      --       -- sources = {
-      --       --   { name = 'luasnip' },
-      --       --   -- more sources
-      --       -- },
-      --     }
-      --   end,
-      --   opts = function(_, opts)
-      --     opts.sources = opts.sources or {}
-      --     table.insert(opts.sources, {
-      --       name = "lazydev",
-      --       group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-      --     })
-      --   end,
-      -- },
     },
     config = function()
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
       require("lspconfig").awk_ls.setup({ capabilities = capabilities })
       require("lspconfig").bashls.setup({ capabilities = capabilities })
       require("lspconfig").clangd.setup({ capabilities = capabilities })
@@ -51,6 +28,13 @@ return {
       require("lspconfig").graphql.setup({ capabilities = capabilities })
       -- helm_ls - experimental
       require("lspconfig").jedi_language_server.setup({ capabilities = capabilities })
+      require("lspconfig").ruff.setup({ -- not working
+        init_options = {
+          settings = {
+            logLevel = "debug",
+          },
+        },
+      })
       -- jsonls
       -- postgres_lsp
       -- rust_analyzer
@@ -60,7 +44,7 @@ return {
       require("lspconfig").ts_ls.setup({ capabilities = capabilities })
       -- require("lspconfig").yamlls.setup({ capabilities = capabilities })
       vim.g.markdown_fenced_languages = {
-        "ts=typescript"
+        "ts=typescript",
       }
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)

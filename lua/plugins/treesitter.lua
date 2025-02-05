@@ -1,9 +1,9 @@
 return {
   {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     config = function()
-      require 'nvim-treesitter.configs'.setup {
+      require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "c",
           "go",
@@ -34,7 +34,7 @@ return {
           end,
           additional_vim_regex_highlighting = false,
         },
-      }
-    end
-  }
+      })
+    end,
+  },
 }
