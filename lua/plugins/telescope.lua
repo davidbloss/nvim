@@ -38,7 +38,10 @@ return {
       vim.keymap.set("n", "<space>fd", require("telescope.builtin").lsp_document_symbols)
       vim.keymap.set("n", "<space>fw", require("telescope.builtin").lsp_dynamic_workspace_symbols)
       vim.keymap.set("n", "<space>fb", require("telescope.builtin").current_buffer_fuzzy_find)
-      vim.keymap.set("n", "<space>fB", require("telescope.builtin").buffers)
+
+      -- buffer keymaps
+      vim.keymap.set("n", "<space>B", require("telescope.builtin").buffers)
+      -- vim.keymap.set("n", "<space>bd", require("telescope.builtin").buffers)
 
       -- edit neovim
       vim.keymap.set("n", "<space>en", function()

@@ -14,11 +14,12 @@ return {
       conform.setup({
         formatters_by_ft = {
           ["*"] = { "trim_whitespace" },
+          -- ["astro"] = { "prettierd", lsp_format = "fallback" },
           buf = { "buf" },
           css = { "prettier" },
           graphql = front_end_opts,
           go = { "gofumpt" },
-          html = front_end_opts,
+          -- html = front_end_opts,
           javascript = front_end_opts,
           javascriptreact = front_end_opts,
           just = { "just" },
@@ -30,7 +31,7 @@ return {
           svelte = front_end_opts,
           typescript = front_end_opts,
           typescriptreact = front_end_opts,
-          yaml = { "yamlfix", "prettier", stop_after_first = true },
+          -- yaml = { "yamlfix", "prettier", stop_after_first = true },
           -- zig = { "zigfmt" },
         },
       })

@@ -27,6 +27,9 @@ vim.keymap.set("n", "<C-b>", "<C-b>M")
 vim.keymap.set("n", "H", "<CMD>bprevious<CR>")
 vim.keymap.set("n", "L", "<CMD>bnext<CR>")
 
+-- TELESCOPE TODO
+-- actions.delete_buffer({prompt_bufnr})
+
 -- Window navigation
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
