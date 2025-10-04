@@ -18,38 +18,33 @@ return {
     },
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
-      local lspconfig = require("lspconfig")
-      lspconfig.astro.setup({ capabilities = capabilities })
-      lspconfig.awk_ls.setup({ capabilities = capabilities })
-      lspconfig.bashls.setup({ capabilities = capabilities })
-      lspconfig.clangd.setup({ capabilities = capabilities })
-      -- lspconfig.denols.setup({ capabilities = capabilities })
-      lspconfig.dockerls.setup({ capabilities = capabilities })
-      lspconfig.gitlab_ci_ls.setup({ capabilities = capabilities })
-      lspconfig.gopls.setup({ capabilities = capabilities })
-      lspconfig.graphql.setup({ capabilities = capabilities })
-      lspconfig.intelephense.setup({ capabilities = capabilities })
+      local lspconfig = vim.lsp.config
+      lspconfig.astro = { capabilities = capabilities }
+      lspconfig.awk_ls = { capabilities = capabilities }
+      lspconfig.bashls = { capabilities = capabilities }
+      lspconfig.clangd = { capabilities = capabilities }
+      -- lspconfig.denols = { capabilities = capabilities }
+      -- lspconfig.dockerls = { capabilities = capabilities }
+      lspconfig.gitlab_ci_ls = { capabilities = capabilities }
+      lspconfig.gopls = { capabilities = capabilities }
+      lspconfig.graphql = { capabilities = capabilities }
+      lspconfig.intelephense = { capabilities = capabilities }
       -- helm_ls - experimental
-      lspconfig.jedi_language_server.setup({ capabilities = capabilities })
-      lspconfig.pyright.setup({ capabilities = capabilities })
-      lspconfig.ruff.setup({ -- not working
+      lspconfig.jedi_language_server = { capabilities = capabilities }
+      lspconfig.pyright = { capabilities = capabilities }
+      lspconfig.ruff = { -- not workin
         init_options = {
           settings = {
             logLevel = "debug",
           },
         },
-      })
-      -- jsonls
-      -- postgres_lsp
-      -- rust_analyzer
-      -- sqlls
-      lspconfig.lua_ls.setup({ capabilities = capabilities })
-      lspconfig.terraformls.setup({
+      }
+      lspconfig.lua_ls = { capabilities = capabilities }
+      lspconfig.terraformls = {
         capabilities = capabilities,
         filetypes = { "hcl", "terraform", "terraform-vars" },
-      })
-      lspconfig.ts_ls.setup({ capabilities = capabilities })
-      -- require("lspconfig").yamlls.setup({ capabilities = capabilities })
+      }
+      lspconfig.ts_ls = { capabilities = capabilities }
       vim.g.markdown_fenced_languages = {
         "ts=typescript",
       }
