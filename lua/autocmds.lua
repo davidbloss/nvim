@@ -12,11 +12,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-  desc = "Format on save",
-  group = vim.api.nvim_create_augroup("lsp_format_on_save", {}),
-  callback = function()
-    vim.lsp.buf.format()
-  end,
-})

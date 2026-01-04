@@ -23,12 +23,10 @@ return {
       lspconfig.awk_ls = { capabilities = capabilities }
       lspconfig.bashls = { capabilities = capabilities }
       lspconfig.clangd = { capabilities = capabilities }
-      -- lspconfig.denols = { capabilities = capabilities }
       -- lspconfig.dockerls = { capabilities = capabilities }
       lspconfig.gitlab_ci_ls = { capabilities = capabilities }
       lspconfig.gopls = { capabilities = capabilities }
       lspconfig.graphql = { capabilities = capabilities }
-      lspconfig.intelephense = { capabilities = capabilities }
       -- helm_ls - experimental
       lspconfig.jedi_language_server = { capabilities = capabilities }
       lspconfig.pyright = { capabilities = capabilities }
@@ -44,11 +42,16 @@ return {
         capabilities = capabilities,
         filetypes = { "hcl", "terraform", "terraform-vars" },
       }
-      lspconfig.ts_ls = { capabilities = capabilities }
+      lspconfig.ts_ls = {
+        capabilities = capabilities,
+        filetypes = { "typescript", "typescriptreact" },
+      }
+
       vim.g.markdown_fenced_languages = {
         "ts=typescript",
       }
       vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then
