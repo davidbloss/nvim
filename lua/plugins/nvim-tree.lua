@@ -30,7 +30,7 @@ return {
         end
 
         local function opts(desc)
-          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+          return { desc = "nvim-tree: " .. desc, buf = bufnr, noremap = true, silent = true, nowait = true }
         end
 
         api.config.mappings.default_on_attach(bufnr)
