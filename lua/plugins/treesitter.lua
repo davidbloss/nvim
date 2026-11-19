@@ -1,6 +1,9 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    -- the default branch is now `main` (a rewrite without nvim-treesitter.configs);
+    -- stay on the frozen `master` branch until this config is migrated
+    branch = "master",
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
