@@ -24,15 +24,15 @@ jobs:
     env:
       TREE_SITTER_VERSION: v0.27.2 # nvim-treesitter main needs >= 0.26.1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: rhysd/action-setup-vim@v1
+      - uses: rhysd/action-setup-vim@v1.6.1
         with:
           neovim: true
           version: ${{ matrix.nvim }}
 
       # gopls is built from source by Mason
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v7
         with:
           go-version: stable
           cache: false
@@ -52,7 +52,7 @@ jobs:
           echo "nvim=$(nvim --version | head -n 1 | tr -c '[:alnum:].\n' '-')" >> "$GITHUB_OUTPUT"
 
       - name: Cache plugins, parsers and Mason packages
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .tests/data
           key: smoke-${{ runner.os }}-${{ matrix.nvim }}-${{ steps.versions.outputs.nvim }}-${{ hashFiles('lazy-lock.json', 'tests/smoke/install.lua') }}
@@ -68,9 +68,9 @@ jobs:
     env:
       SELENE_VERSION: 0.32.0
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: JohnnyMorganz/stylua-action@v4
+      - uses: JohnnyMorganz/stylua-action@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: 2.6.0
