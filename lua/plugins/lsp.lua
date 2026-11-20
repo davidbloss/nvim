@@ -2,8 +2,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "williamboman/mason.nvim" },
-      { "williamboman/mason-lspconfig.nvim" },
+      { "mason-org/mason.nvim" },
+      { "mason-org/mason-lspconfig.nvim" },
       {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
@@ -61,7 +61,7 @@ return {
           if client:supports_method("textDocument/formatting") then
             -- Format the current buffer on save
             vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = args.buf,
+              buf = args.buf,
               callback = function()
                 vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
               end,

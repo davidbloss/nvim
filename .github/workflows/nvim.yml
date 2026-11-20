@@ -1,0 +1,88 @@
+name: nvim
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # weekly, to catch new deprecations in Neovim nightly between commits
+    - cron: "0 12 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: smoke (${{ matrix.nvim }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        nvim: [stable, nightly]
+    env:
+      TREE_SITTER_VERSION: v0.27.2 # nvim-treesitter main needs >= 0.26.1
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: rhysd/action-setup-vim@v1.6.1
+        with:
+          neovim: true
+          version: ${{ matrix.nvim }}
+
+      # gopls is built from source by Mason
+      - uses: actions/setup-go@v7
+        with:
+          go-version: stable
+          cache: false
+
+      - name: Install tree-sitter CLI
+        run: |
+          curl -fsSL "https://github.com/tree-sitter/tree-sitter/releases/download/${TREE_SITTER_VERSION}/tree-sitter-linux-x64.gz" \
+            | gunzip > "$RUNNER_TEMP/tree-sitter"
+          chmod +x "$RUNNER_TEMP/tree-sitter"
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+
+      - name: Versions
+        id: versions
+        run: |
+          nvim --version | head -n 3
+          tree-sitter --version
+          echo "nvim=$(nvim --version | head -n 1 | tr -c '[:alnum:].\n' '-')" >> "$GITHUB_OUTPUT"
+
+      - name: Cache plugins, parsers and Mason packages
+        uses: actions/cache@v6
+        with:
+          path: .tests/data
+          key: smoke-${{ runner.os }}-${{ matrix.nvim }}-${{ steps.versions.outputs.nvim }}-${{ hashFiles('lazy-lock.json', 'tests/smoke/install.lua') }}
+          restore-keys: |
+            smoke-${{ runner.os }}-${{ matrix.nvim }}-
+
+      - name: Smoke test
+        run: make test-install
+
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SELENE_VERSION: 0.32.0
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: JohnnyMorganz/stylua-action@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: 2.6.0
+          args: --check .
+
+      - name: Install selene
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/selene.zip" \
+            "https://github.com/Kampfkarren/selene/releases/download/${SELENE_VERSION}/selene-${SELENE_VERSION}-linux.zip"
+          unzip -q "$RUNNER_TEMP/selene.zip" -d "$RUNNER_TEMP"
+          chmod +x "$RUNNER_TEMP/selene"
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+
+      - name: selene
+        run: selene init.lua lua after tests

@@ -52,11 +52,17 @@ vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>")
 vim.keymap.set("n", "<leader>x", ":<CMD>lua<CR>")
 vim.keymap.set("v", "<leader>x", ":lua<CR>")
 
+-- `float = true` is deprecated (Nvim 0.12+); open the float from on_jump instead
+local function open_diagnostic_float(diagnostic, bufnr)
+  if diagnostic then
+    vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+  end
+end
 vim.keymap.set("n", "[d", function()
-  vim.diagnostic.jump({ count = -1, float = true })
+  vim.diagnostic.jump({ count = -1, on_jump = open_diagnostic_float })
 end)
 vim.keymap.set("n", "]d", function()
-  vim.diagnostic.jump({ count = 1, float = true })
+  vim.diagnostic.jump({ count = 1, on_jump = open_diagnostic_float })
 end)
 
 -- Terminal
@@ -64,6 +70,6 @@ vim.keymap.set("n", "T", function()
   vim.cmd.vnew()
   vim.cmd.term()
   vim.cmd.wincmd("J")
-  vim.api.nvim_win_set_height(0, 20)
+  vim.cmd.resize(20)
   vim.cmd("startinsert")
 end)

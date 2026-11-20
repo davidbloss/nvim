@@ -1,0 +1,5 @@
+std = "vim"
+
+[lints]
+# lazy.nvim plugin specs mix list and hash parts by design: { "owner/repo", opts = {} }
+mixed_table = "allow"

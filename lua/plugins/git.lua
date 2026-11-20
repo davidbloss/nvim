@@ -1,6 +1,6 @@
 local git_icons = require("config.icons").git
 local gitsigns_opts = {
-  on_attach = function(bufnr)
+  on_attach = function(_bufnr)
     local gitsigns = require("gitsigns")
     vim.keymap.set("n", "[h", function()
       gitsigns.nav_hunk("prev")
@@ -44,9 +44,6 @@ local gitsigns_opts = {
   numhl = true,
   linehl = false,
   word_diff = false,
-  current_line_blame_opts = {
-    delay = 300,
-  },
   watch_gitdir = {
     interval = 1000,
     follow_files = true,

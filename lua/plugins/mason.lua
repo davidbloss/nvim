@@ -1,11 +1,11 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     enabled = true,
     config = true,
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     enabled = true,
     config = true,
   },
